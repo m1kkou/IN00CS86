@@ -1,0 +1,234 @@
+TEHTÄVÄNANTO:
+
+Tehtävissä käytetään Employees-tietokantaa (use employees).
+
+Lajittelu
+
+a) Tulosta kymmenen aakkosjärjestyksessä ensimmäisen työntekijän tiedot sukunimen mukaan lajiteltuna. Vihje: LIMIT rajoittaa tulostettavien tietojen määrän.
+
+b) Sama kuten edellä, mutta sukunimen JA etunimen mukaan lajiteltuna.
+
+c) Tulosta viiden viimeksi palkatun työntekijän tiedot.
+
+Seuraavissa tehtävissä tarvitaan tietoja useammasta kuin yhdestä taulusta (JOIN).
+
+d) Kenellä on suurin palkka ?
+
+e) Kenellä on pienin palkka ?
+
+f) Tulosta työntekijät, jotka ansaitsevat yli 150000.
+
+g) Kuinka monta työntekijää työskentelee myynnissä (Sales) ? Entä markkinoinnissa (Marketing) ?
+
+h) Tulosta kaikkien osastonjohtajien (Department Managers) etunimi, sukunimi ja osasto, jolla työskentelee.
+
+i) Mikä on myynnissä työskentelevien keskipalkka ? Entä markkinoinnissa ?
+
+employees
++--------+------------+----------------+------------------+--------+------------+
+| emp_no | birth_date | first_name     | last_name        | gender | hire_date  |
++--------+------------+----------------+------------------+--------+------------+
+
+departments
++---------+--------------------+
+| dept_no | dept_name          |
++---------+--------------------+
+
+dept_emp
++--------+---------+------------+------------+
+| emp_no | dept_no | from_date  | to_date    |
++--------+---------+------------+------------+
+
+
+VASTAUKSET:
+
+a)
+SELECT * FROM employees ORDER BY last_name LIMIT 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+|  17885 | 1954-02-01 | Takanari   | Aamodt    | M      | 1996-08-19 |
+|  19898 | 1957-03-09 | Vidar      | Aamodt    | M      | 1988-08-06 |
+|  17400 | 1962-03-22 | Basim      | Aamodt    | F      | 1991-09-15 |
+|  12982 | 1952-12-08 | Sachem     | Aamodt    | F      | 1992-01-11 |
+|  12516 | 1958-06-25 | Sreenivas  | Aamodt    | F      | 1990-03-06 |
+|  12791 | 1960-06-16 | Mokhtar    | Aamodt    | M      | 1994-08-14 |
+|  16572 | 1956-11-26 | Matt       | Aamodt    | M      | 1987-06-16 |
+|  18182 | 1963-02-23 | Dekang     | Aamodt    | F      | 1988-05-25 |
+|  15427 | 1959-03-06 | Aluzio     | Aamodt    | M      | 1985-03-03 |
+|  11761 | 1964-07-17 | Bartek     | Aamodt    | M      | 1991-06-12 |
++--------+------------+------------+-----------+--------+------------+
+
+b)
+SELECT * FROM employees ORDER BY last_name AND first_name LIMIT 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+| 499999 | 1958-05-01 | Sachin     | Tsukuda   | M      | 1997-11-30 |
+|  10010 | 1963-06-01 | Duangkaew  | Piveteau  | F      | 1989-08-24 |
+|  10009 | 1952-04-19 | Sumant     | Peac      | F      | 1985-02-18 |
+|  10008 | 1958-02-19 | Saniya     | Kalloufi  | M      | 1994-09-15 |
+|  10007 | 1957-05-23 | Tzvetan    | Zielinski | F      | 1989-02-10 |
+|  10006 | 1953-04-20 | Anneke     | Preusig   | F      | 1989-06-02 |
+|  10005 | 1955-01-21 | Kyoichi    | Maliniak  | M      | 1989-09-12 |
+|  10004 | 1954-05-01 | Chirstian  | Koblick   | M      | 1986-12-01 |
+|  10003 | 1959-12-03 | Parto      | Bamford   | M      | 1986-08-28 |
+|  10002 | 1964-06-02 | Bezalel    | Simmel    | F      | 1985-11-21 |
++--------+------------+------------+-----------+--------+------------+
+
+c)
+SELECT * FROM employees ORDER BY hire_date DESC LIMIT 10;
++--------+------------+------------+------------+--------+------------+
+| emp_no | birth_date | first_name | last_name  | gender | hire_date  |
++--------+------------+------------+------------+--------+------------+
+| 463807 | 1964-06-12 | Bikash     | Covnot     | M      | 2000-01-28 |
+| 428377 | 1957-05-09 | Yucai      | Gerlach    | M      | 2000-01-23 |
+| 499553 | 1954-05-06 | Hideyuki   | Delgrande  | F      | 2000-01-22 |
+| 222965 | 1959-08-07 | Volkmar    | Perko      | F      | 2000-01-13 |
+|  47291 | 1960-09-09 | Ulf        | Flexer     | M      | 2000-01-12 |
+| 422990 | 1953-04-09 | Jaana      | Verspoor   | F      | 2000-01-11 |
+| 227544 | 1954-11-17 | Shahab     | Demeyer    | M      | 2000-01-08 |
+| 205048 | 1960-09-12 | Ennio      | Alblas     | F      | 2000-01-06 |
+| 226633 | 1958-06-10 | Xuejun     | Benzmuller | F      | 2000-01-04 |
+| 424445 | 1953-04-27 | Jeong      | Boreale    | M      | 2000-01-03 |
++--------+------------+------------+------------+--------+------------+
+
+d)
+SELECT * FROM employees JOIN salaries ON salaries.emp_no = employees.emp_no  ORDER BY salaries.salary DESC LIMIT 1;
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  | emp_no | salary | from_date  | to_date    |
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+|  43624 | 1953-11-14 | Tokuyasu   | Pesch     | M      | 1985-03-26 |  43624 | 158220 | 2002-03-22 | 9999-01-01 |
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+
+e)
+SELECT * FROM employees JOIN salaries ON salaries.emp_no = employees.emp_no  ORDER BY salaries.salary ASC LIMIT 1;
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  | emp_no | salary | from_date  | to_date    |
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+| 253406 | 1953-09-23 | Olivera    | Baek      | M      | 1994-07-04 | 253406 |  38623 | 2002-02-20 | 9999-01-01 |
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+
+f)
+SELECT * FROM employees JOIN salaries ON salaries.emp_no = employees.emp_no WHERE salaries.salary > 150000;
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  | emp_no | salary | from_date  | to_date    |
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+|  43624 | 1953-11-14 | Tokuyasu   | Pesch     | M      | 1985-03-26 |  43624 | 151115 | 1998-03-23 | 1999-03-23 |
+|  43624 | 1953-11-14 | Tokuyasu   | Pesch     | M      | 1985-03-26 |  43624 | 153166 | 1999-03-23 | 2000-03-22 |
+|  43624 | 1953-11-14 | Tokuyasu   | Pesch     | M      | 1985-03-26 |  43624 | 153458 | 2000-03-22 | 2001-03-22 |
+|  43624 | 1953-11-14 | Tokuyasu   | Pesch     | M      | 1985-03-26 |  43624 | 157821 | 2001-03-22 | 2002-03-22 |
+|  43624 | 1953-11-14 | Tokuyasu   | Pesch     | M      | 1985-03-26 |  43624 | 158220 | 2002-03-22 | 9999-01-01 |
+|  46439 | 1953-01-31 | Ibibia     | Junet     | M      | 1985-05-20 |  46439 | 150345 | 2002-05-15 | 9999-01-01 |
+|  47978 | 1956-03-24 | Xiahua     | Whitcomb  | M      | 1985-07-18 |  47978 | 151929 | 2001-07-14 | 2002-07-14 |
+|  47978 | 1956-03-24 | Xiahua     | Whitcomb  | M      | 1985-07-18 |  47978 | 155709 | 2002-07-14 | 9999-01-01 |
+|  66793 | 1964-05-15 | Lansing    | Kambil    | M      | 1985-06-20 |  66793 | 150052 | 2002-06-16 | 9999-01-01 |
+|  80823 | 1963-01-21 | Willard    | Baca      | M      | 1985-02-26 |  80823 | 151768 | 2001-02-22 | 2002-02-22 |
+|  80823 | 1963-01-21 | Willard    | Baca      | M      | 1985-02-26 |  80823 | 154459 | 2002-02-22 | 9999-01-01 |
+| 109334 | 1955-08-02 | Tsutomu    | Alameldin | M      | 1985-02-15 | 109334 | 151484 | 1998-02-12 | 1999-02-12 |
+| 109334 | 1955-08-02 | Tsutomu    | Alameldin | M      | 1985-02-15 | 109334 | 154885 | 1999-02-12 | 2000-02-12 |
+| 109334 | 1955-08-02 | Tsutomu    | Alameldin | M      | 1985-02-15 | 109334 | 155377 | 2000-02-12 | 2001-02-11 |
+| 109334 | 1955-08-02 | Tsutomu    | Alameldin | M      | 1985-02-15 | 109334 | 154888 | 2001-02-11 | 2002-02-11 |
+| 109334 | 1955-08-02 | Tsutomu    | Alameldin | M      | 1985-02-15 | 109334 | 155190 | 2002-02-11 | 9999-01-01 |
+| 205000 | 1956-01-14 | Charmane   | Griswold  | M      | 1990-06-23 | 205000 | 151596 | 2000-10-09 | 2001-10-09 |
+| 205000 | 1956-01-14 | Charmane   | Griswold  | M      | 1990-06-23 | 205000 | 153715 | 2001-10-09 | 9999-01-01 |
+| 237542 | 1954-10-05 | Weicheng   | Hatcliff  | F      | 1985-04-12 | 237542 | 150994 | 2001-04-08 | 2002-04-08 |
+| 237542 | 1954-10-05 | Weicheng   | Hatcliff  | F      | 1985-04-12 | 237542 | 152687 | 2002-04-08 | 9999-01-01 |
+| 238117 | 1959-06-21 | Mitsuyuki  | Stanfel   | M      | 1988-01-03 | 238117 | 152220 | 2001-12-30 | 9999-01-01 |
+| 253939 | 1957-12-03 | Sanjai     | Luders    | M      | 1987-04-15 | 253939 | 150378 | 2000-04-11 | 2001-04-11 |
+| 253939 | 1957-12-03 | Sanjai     | Luders    | M      | 1987-04-15 | 253939 | 154227 | 2001-04-11 | 2002-04-11 |
+| 253939 | 1957-12-03 | Sanjai     | Luders    | M      | 1987-04-15 | 253939 | 155513 | 2002-04-11 | 9999-01-01 |
+| 254466 | 1963-05-27 | Honesty    | Mukaidono | M      | 1986-08-08 | 254466 | 150754 | 1999-08-05 | 2000-08-04 |
+| 254466 | 1963-05-27 | Honesty    | Mukaidono | M      | 1986-08-08 | 254466 | 152576 | 2000-08-04 | 2001-08-04 |
+| 254466 | 1963-05-27 | Honesty    | Mukaidono | M      | 1986-08-08 | 254466 | 156286 | 2001-08-04 | 9999-01-01 |
+| 266526 | 1957-02-14 | Weijing    | Chenoweth | F      | 1986-10-08 | 266526 | 151080 | 2000-10-04 | 2001-10-04 |
+| 266526 | 1957-02-14 | Weijing    | Chenoweth | F      | 1986-10-08 | 266526 | 152710 | 2001-10-04 | 9999-01-01 |
+| 276633 | 1954-01-27 | Shin       | Birdsall  | M      | 1987-10-08 | 276633 | 150467 | 2000-10-04 | 2001-10-04 |
+| 276633 | 1954-01-27 | Shin       | Birdsall  | M      | 1987-10-08 | 276633 | 152412 | 2001-10-04 | 9999-01-01 |
+| 279776 | 1955-05-06 | Mohammed   | Moehrke   | M      | 1986-06-10 | 279776 | 150740 | 2002-06-06 | 9999-01-01 |
+| 493158 | 1961-05-20 | Lidong     | Meriste   | M      | 1987-05-09 | 493158 | 150993 | 1999-05-06 | 2000-05-05 |
+| 493158 | 1961-05-20 | Lidong     | Meriste   | M      | 1987-05-09 | 493158 | 151565 | 2000-05-05 | 2001-05-05 |
+| 493158 | 1961-05-20 | Lidong     | Meriste   | M      | 1987-05-09 | 493158 | 152208 | 2001-05-05 | 2002-05-05 |
+| 493158 | 1961-05-20 | Lidong     | Meriste   | M      | 1987-05-09 | 493158 | 154376 | 2002-05-05 | 9999-01-01 |
++--------+------------+------------+-----------+--------+------------+--------+--------+------------+------------+
+
+g)
+SELECT COUNT(*) FROM employees JOIN dept_emp on dept_emp.emp_no = employees.emp_no JOIN departments on departments.dept_no = dept_emp.dept_no WHERE departments.dept_name = 'Sales';
++----------+
+| COUNT(*) |
++----------+
+|    52245 |
++----------+
+
+SELECT COUNT(*) FROM employees JOIN dept_emp on dept_emp.emp_no = employees.emp_no JOIN departments on departments.dept_no = dept_emp.dept_no WHERE departments.dept_name = 'Marketing';
++----------+
+| COUNT(*) |
++----------+
+|    20211 |
++----------+
+
+h)
+SELECT 
+employees.first_name AS etunimi, 
+employees.last_name AS sukunimi, 
+departments.dept_name AS osasto 
+FROM dept_manager 
+JOIN employees ON employees.emp_no = dept_manager.emp_no 
+JOIN dept_emp ON dept_emp.emp_no = employees.emp_no 
+JOIN departments ON departments.dept_no = dept_emp.dept_no;  
++-------------+--------------+--------------------+
+| etunimi     | sukunimi     | osasto             |
++-------------+--------------+--------------------+
+| Tonny       | Butterworth  | Customer Service   |
+| Marjo       | Giarratana   | Customer Service   |
+| Xiaobin     | Spinelli     | Customer Service   |
+| Yuchang     | Weedman      | Customer Service   |
+| DeForest    | Hagimont     | Development        |
+| Leon        | DasSarma     | Development        |
+| Ebru        | Alpin        | Finance            |
+| Isamu       | Legleitner   | Finance            |
+| Shirish     | Ossenbruggen | Human Resources    |
+| Karsten     | Sigstam      | Human Resources    |
+| Margareta   | Markovitch   | Marketing          |
+| Vishwani    | Minakawa     | Marketing          |
+| Krassimir   | Wegerle      | Production         |
+| Rosine      | Cools        | Production         |
+| Shem        | Kieras       | Production         |
+| Oscar       | Ghazalie     | Production         |
+| Peternela   | Onuegbe      | Quality Management |
+| Rutger      | Hofmeyr      | Quality Management |
+| Sanjoy      | Quadeer      | Quality Management |
+| Dung        | Pesch        | Quality Management |
+| Arie        | Staelin      | Research           |
+| Hilary      | Kambil       | Research           |
+| Przemyslawa | Kaelbling    | Sales              |
+| Hauke       | Zhang        | Sales              |
++-------------+--------------+--------------------+
+
+i)
+SELECT 
+AVG(salary) AS Keskipalkka 
+FROM employees 
+JOIN salaries ON salaries.emp_no = employees.emp_no 
+JOIN dept_emp on dept_emp.emp_no = employees.emp_no 
+JOIN departments on departments.dept_no = dept_emp.dept_no 
+WHERE departments.dept_name = 'Sales';
++-------------+
+| Keskipalkka |
++-------------+
+|  80667.6058 |
++-------------+
+
+SELECT 
+AVG(salary) AS Keskipalkka 
+FROM employees 
+JOIN salaries ON salaries.emp_no = employees.emp_no 
+JOIN dept_emp on dept_emp.emp_no = employees.emp_no 
+JOIN departments on departments.dept_no = dept_emp.dept_no 
+WHERE departments.dept_name = 'Marketing';
++-------------+
+| Keskipalkka |
++-------------+
+|  71913.2000 |
++-------------+
+
