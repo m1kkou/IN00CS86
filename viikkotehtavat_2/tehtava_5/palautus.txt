@@ -1,0 +1,74 @@
+Tehtävän anto:
+Muuta aikaisemmin tehdyn pet-taulun rakenne oppimateriaalissa esitetyn kaltaiseksi, eli meillä on kaksi taulua, pet ja owner ja niiden välillä yhdestä moneen-yhteys.
+Esitä vastauksessasi tarvittavat SQL-lauseet sekä taulujen rakenne DESC-lauseella.
+
+Vastaus:
+Tehdään ensin owner taulu:
+CREATE TABLE owner (first_name VARCHAR(255), last_name VARCHAR(255), address VARCHAR(255), ownerID INT PRIMARY KEY AUTO_INCREMENT)
+
+Listätään tiedot:
+INSERT INTO owner VALUES('Harold', 'Lloyd', 'Someaddress 1', 1);
+INSERT INTO owner VALUES('Gwen', 'Stefani', 'Someaddress 2', 2);
+INSERT INTO owner VALUES('Benny', 'Hill', 'Someaddress 3', 3);
+INSERT INTO owner VALUES('Diane', 'Keaton', 'Someaddress 4', 4);
+INSERT INTO owner VALUES('Arja', 'Koriseva', 'Someaddress 5', 5);
+
+Lisätään ID -sarake pet -tauluun ja poistetaan ylimääräinen owner -sarake taulusta sekä päivitetään viittaukset omistajatauluun:
+ALTER TABLE pet DROP COLUMN owner;
+ALTER TABLE pet ADD COLUMN petID INT PRIMARY KEY AUTO_INCREMENT;
+ALTER TABLE pet ADD COLUMN ownerID INT;
+ALTER TABLE pet ADD CONSTRAINT FOREIGN KEY (ownerID) REFERENCES owner(ownerID);
+
+DESC pet:
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| name    | varchar(20) | YES  |     | NULL    |                |
+| species | varchar(20) | YES  |     | NULL    |                |
+| sex     | char(1)     | YES  |     | NULL    |                |
+| birth   | date        | YES  |     | NULL    |                |
+| death   | date        | YES  |     | NULL    |                |
+| petID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| ownerID | int(11)     | YES  | MUL | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+
+Päivitetään owner -tauluun viittaukset:
+UPDATE pet SET ownerID=5 WHERE name='Bowser';
+UPDATE pet SET ownerID=3 WHERE name='Chirpy' OR name='Whistler';
+jne..
+
+DESC owner:
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| first_name | varchar(20) | YES  |     | NULL    |                |
+| last_name  | varchar(20) | YES  |     | NULL    |                |
+| address    | varchar(20) | YES  |     | NULL    |                |
+| ownerID    | int(11)     | NO   | PRI | NULL    | auto_increment |
++------------+-------------+------+-----+---------+----------------+
+
+Taulut nyt, 
+pet:
++----------+---------+------+------------+------------+-------+---------+
+| name     | species | sex  | birth      | death      | petID | ownerID |
++----------+---------+------+------------+------------+-------+---------+
+| Fluffy   | cat     | f    | 1993-02-04 | NULL       |     1 |       1 |
+| Claws    | cat     | m    | 1994-03-17 | NULL       |     2 |       3 |
+| Buffy    | dog     | f    | 1989-05-13 | NULL       |     3 |       1 |
+| Fang     | dog     | m    | 1990-08-27 | NULL       |     4 |       3 |
+| Bowser   | dog     | m    | 1989-08-31 | 1995-07-29 |     5 |       5 |
+| Chirpy   | bird    | f    | 1998-09-11 | NULL       |     6 |       3 |
+| Whistler | bird    | NULL | 1997-12-09 | NULL       |     7 |       3 |
+| Slim     | snake   | m    | 1996-04-29 | NULL       |     8 |       3 |
++----------+---------+------+------------+------------+-------+---------+
+owner:
++------------+-----------+---------------+---------+
+| first_name | last_name | address       | ownerID |
++------------+-----------+---------------+---------+
+| Harold     | Lloyd     | Someaddress 1 |       1 |
+| Gwen       | Stefani   | Someaddress 2 |       2 |
+| Benny      | Hill      | Someaddress 3 |       3 |
+| Diane      | Keaton    | Someaddress 4 |       4 |
+| Arja       | Koriseva  | Someaddress 5 |       5 |
++------------+-----------+---------------+---------+
+
