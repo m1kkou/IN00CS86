@@ -1,0 +1,243 @@
+TEHTÄVÄNANTO:
+
+a) Tulosta DVD-elokuvien kielet (language) aakkosjärjestyksessä
+
+b) Tulosta kaikkien niiden näyttelijöiden elokuvat, joiden sukunimi on Temple.
+
+c) Tulosta elokuvassa "Ghost Groundhog" näytelleet näyttelijät.
+
+d) Montako kauhuelokuvaa ("Horror") tietokannassa on ?
+
+e) Tulosta kaikki kauhuelokuvat.
+
+VASTAUKSET:
+
+a)
+SELECT 
+language.name 
+FROM film 
+JOIN language ON language.language_id = film.language_id 
+GROUP BY film.language_id 
+ORDER BY language.name;
++---------+
+| name    |
++---------+
+| English |
++---------+
+
+b) 
+SELECT 
+actor.first_name AS first_name, 
+actor.last_name AS last_name, 
+film.title AS film 
+FROM film_actor 
+JOIN film ON film.film_id = film_actor.film_id 
+JOIN actor ON actor.actor_id = film_actor.actor_id 
+WHERE actor.last_name = 'Temple';
++------------+-----------+-------------------------+
+| first_name | last_name | film                    |
++------------+-----------+-------------------------+
+| MENA       | TEMPLE    | ACADEMY DINOSAUR        |
+| MENA       | TEMPLE    | ALABAMA DEVIL           |
+| MENA       | TEMPLE    | BALLOON HOMEWARD        |
+| MENA       | TEMPLE    | BEACH HEARTBREAKERS     |
+| MENA       | TEMPLE    | BUTTERFLY CHOCOLAT      |
+| MENA       | TEMPLE    | CARRIE BUNCH            |
+| MENA       | TEMPLE    | CASUALTIES ENCINO       |
+| MENA       | TEMPLE    | CONTACT ANONYMOUS       |
+| MENA       | TEMPLE    | DROP WATERFRONT         |
+| MENA       | TEMPLE    | EARLY HOME              |
+| MENA       | TEMPLE    | ENGLISH BULWORTH        |
+| MENA       | TEMPLE    | FELLOWSHIP AUTUMN       |
+| MENA       | TEMPLE    | GILMORE BOILED          |
+| MENA       | TEMPLE    | GUMP DATE               |
+| MENA       | TEMPLE    | ICE CROSSING            |
+| MENA       | TEMPLE    | INTERVIEW LIAISONS      |
+| MENA       | TEMPLE    | JUMANJI BLADE           |
+| MENA       | TEMPLE    | JUNGLE CLOSER           |
+| MENA       | TEMPLE    | LAMBS CINCINATTI        |
+| MENA       | TEMPLE    | LIAISONS SWEET          |
+| MENA       | TEMPLE    | MICROCOSMOS PARADISE    |
+| MENA       | TEMPLE    | MIGHTY LUCK             |
+| MENA       | TEMPLE    | MILE MULAN              |
+| MENA       | TEMPLE    | PRIMARY GLASS           |
+| MENA       | TEMPLE    | REQUIEM TYCOON          |
+| MENA       | TEMPLE    | RESURRECTION SILVERADO  |
+| MENA       | TEMPLE    | VARSITY TRIP            |
+| MENA       | TEMPLE    | VISION TORQUE           |
+| MENA       | TEMPLE    | WASH HEAVENLY           |
+| MENA       | TEMPLE    | WIZARD COLDBLOODED      |
+| RUSSELL    | TEMPLE    | BANG KWAI               |
+| RUSSELL    | TEMPLE    | BILL OTHERS             |
+| RUSSELL    | TEMPLE    | BREAKFAST GOLDFINGER    |
+| RUSSELL    | TEMPLE    | CANYON STOCK            |
+| RUSSELL    | TEMPLE    | CHASING FIGHT           |
+| RUSSELL    | TEMPLE    | CHITTY LOCK             |
+| RUSSELL    | TEMPLE    | CITIZEN SHREK           |
+| RUSSELL    | TEMPLE    | CLOSER BANG             |
+| RUSSELL    | TEMPLE    | COMFORTS RUSH           |
+| RUSSELL    | TEMPLE    | CONNECTION MICROCOSMOS  |
+| RUSSELL    | TEMPLE    | CRAZY HOME              |
+| RUSSELL    | TEMPLE    | CROSSROADS CASUALTIES   |
+| RUSSELL    | TEMPLE    | FROGMEN BREAKING        |
+| RUSSELL    | TEMPLE    | GHOST GROUNDHOG         |
+| RUSSELL    | TEMPLE    | GLORY TRACY             |
+| RUSSELL    | TEMPLE    | GOLD RIVER              |
+| RUSSELL    | TEMPLE    | INDIAN LOVE             |
+| RUSSELL    | TEMPLE    | NOVOCAINE FLIGHT        |
+| RUSSELL    | TEMPLE    | PELICAN COMFORTS        |
+| RUSSELL    | TEMPLE    | PLATOON INSTINCT        |
+| RUSSELL    | TEMPLE    | SANTA PARIS             |
+| RUSSELL    | TEMPLE    | SHAKESPEARE SADDLE      |
+| RUSSELL    | TEMPLE    | SLUMS DUCK              |
+| RUSSELL    | TEMPLE    | SMILE EARRING           |
+| RUSSELL    | TEMPLE    | TOWERS HURRICANE        |
+| RUSSELL    | TEMPLE    | TRAINSPOTTING STRANGERS |
+| RUSSELL    | TEMPLE    | TROOPERS METAL          |
+| RUSSELL    | TEMPLE    | UNCUT SUICIDES          |
+| RUSSELL    | TEMPLE    | VISION TORQUE           |
+| RUSSELL    | TEMPLE    | VOLCANO TEXAS           |
+| RUSSELL    | TEMPLE    | WRATH MILE              |
+| BURT       | TEMPLE    | ATTACKS HATE            |
+| BURT       | TEMPLE    | BLANKET BEVERLY         |
+| BURT       | TEMPLE    | BUCKET BROTHERHOOD      |
+| BURT       | TEMPLE    | BUTTERFLY CHOCOLAT      |
+| BURT       | TEMPLE    | CAPER MOTIONS           |
+| BURT       | TEMPLE    | CHICAGO NORTH           |
+| BURT       | TEMPLE    | COAST RAINBOW           |
+| BURT       | TEMPLE    | EVOLUTION ALTER         |
+| BURT       | TEMPLE    | GATHERING CALENDAR      |
+| BURT       | TEMPLE    | GILMORE BOILED          |
+| BURT       | TEMPLE    | GRAPES FURY             |
+| BURT       | TEMPLE    | HEAVYWEIGHTS BEAST      |
+| BURT       | TEMPLE    | INSIDER ARIZONA         |
+| BURT       | TEMPLE    | POLLOCK DELIVERANCE     |
+| BURT       | TEMPLE    | RACER EGG               |
+| BURT       | TEMPLE    | ROSES TREASURE          |
+| BURT       | TEMPLE    | SLEUTH ORIENT           |
+| BURT       | TEMPLE    | SPIKING ELEMENT         |
+| BURT       | TEMPLE    | SPOILERS HELLFIGHTERS   |
+| BURT       | TEMPLE    | STRAIGHT HOURS          |
+| BURT       | TEMPLE    | VARSITY TRIP            |
+| BURT       | TEMPLE    | WAIT CIDER              |
+| BURT       | TEMPLE    | WARS PLUTO              |
+| THORA      | TEMPLE    | AFRICAN EGG             |
+| THORA      | TEMPLE    | BADMAN DAWN             |
+| THORA      | TEMPLE    | BLANKET BEVERLY         |
+| THORA      | TEMPLE    | CANDIDATE PERDITION     |
+| THORA      | TEMPLE    | CAROL TEXAS             |
+| THORA      | TEMPLE    | CHRISTMAS MOONSHINE     |
+| THORA      | TEMPLE    | GALAXY SWEETHEARTS      |
+| THORA      | TEMPLE    | HOCUS FRIDA             |
+| THORA      | TEMPLE    | INSIDER ARIZONA         |
+| THORA      | TEMPLE    | INTERVIEW LIAISONS      |
+| THORA      | TEMPLE    | JADE BUNCH              |
+| THORA      | TEMPLE    | LOVER TRUMAN            |
+| THORA      | TEMPLE    | LOVERBOY ATTACKS        |
+| THORA      | TEMPLE    | MADISON TRAP            |
+| THORA      | TEMPLE    | RANDOM GO               |
+| THORA      | TEMPLE    | TELEGRAPH VOYAGE        |
+| THORA      | TEMPLE    | TROJAN TOMORROW         |
+| THORA      | TEMPLE    | VIRGINIAN PLUTO         |
+| THORA      | TEMPLE    | WARDROBE PHANTOM        |
+| THORA      | TEMPLE    | WRONG BEHAVIOR          |
++------------+-----------+-------------------------+
+
+c)
+SELECT 
+actor.first_name AS first_name, 
+actor.last_name AS last_name 
+FROM film_actor 
+JOIN film ON film.film_id = film_actor.film_id 
+JOIN actor ON actor.actor_id = film_actor.actor_id 
+WHERE film.title = 'Ghost Groundhog';
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| DAN        | HARRIS    |
+| KENNETH    | TORN      |
+| KEVIN      | GARLAND   |
+| RUSSELL    | TEMPLE    |
+| RENEE      | BALL      |
++------------+-----------+
+
+d)
+SELECT 
+COUNT(*) 
+FROM film_category 
+JOIN category ON category.category_id = film_category.category_id 
+WHERE category.name = 'Horror';
++----------+
+| COUNT(*) |
++----------+
+|       56 |
++----------+
+
+e)
+SELECT 
+film.* 
+FROM film_category 
+JOIN category ON category.category_id = film_category.category_id 
+JOIN film ON film.film_id = film_category.film_id 
+WHERE category.name = 'Horror';
++---------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+--------------------------------------------------------+---------------------+
+| film_id | title                       | description                                                                                                                    | release_year | language_id | original_language_id | rental_duration | rental_rate | length | replacement_cost | rating | special_features                                       | last_update         |
++---------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+--------------------------------------------------------+---------------------+
+|       2 | ACE GOLDFINGER              | A Astounding Epistle of a Database Administrator And a Explorer who must Find a Car in Ancient China                           |         2006 |           1 |                 NULL |               3 |        4.99 |     48 |            12.99 | G      | Trailers,Deleted Scenes                                | 2006-02-15 05:03:42 |
+|       4 | AFFAIR PREJUDICE            | A Fanciful Documentary of a Frisbee And a Lumberjack who must Chase a Monkey in A Shark Tank                                   |         2006 |           1 |                 NULL |               5 |        2.99 |    117 |            26.99 | G      | Commentaries,Behind the Scenes                         | 2006-02-15 05:03:42 |
+|       8 | AIRPORT POLLOCK             | A Epic Tale of a Moose And a Girl who must Confront a Monkey in Ancient India                                                  |         2006 |           1 |                 NULL |               6 |        4.99 |     54 |            15.99 | R      | Trailers                                               | 2006-02-15 05:03:42 |
+|       9 | ALABAMA DEVIL               | A Thoughtful Panorama of a Database Administrator And a Mad Scientist who must Outgun a Mad Scientist in A Jet Boat            |         2006 |           1 |                 NULL |               3 |        2.99 |    114 |            21.99 | PG-13  | Trailers,Deleted Scenes                                | 2006-02-15 05:03:42 |
+|      13 | ALI FOREVER                 | A Action-Packed Drama of a Dentist And a Crocodile who must Battle a Feminist in The Canadian Rockies                          |         2006 |           1 |                 NULL |               4 |        4.99 |    150 |            21.99 | PG     | Deleted Scenes,Behind the Scenes                       | 2006-02-15 05:03:42 |
+|      24 | ANALYZE HOOSIERS            | A Thoughtful Display of a Explorer And a Pastry Chef who must Overcome a Feminist in The Sahara Desert                         |         2006 |           1 |                 NULL |               6 |        2.99 |    181 |            19.99 | R      | Trailers,Behind the Scenes                             | 2006-02-15 05:03:42 |
+|      30 | ANYTHING SAVANNAH           | A Epic Story of a Pastry Chef And a Woman who must Chase a Feminist in An Abandoned Fun House                                  |         2006 |           1 |                 NULL |               4 |        2.99 |     82 |            27.99 | R      | Trailers,Deleted Scenes,Behind the Scenes              | 2006-02-15 05:03:42 |
+|      34 | ARABIA DOGMA                | A Touching Epistle of a Madman And a Mad Cow who must Defeat a Student in Nigeria                                              |         2006 |           1 |                 NULL |               6 |        0.99 |     62 |            29.99 | NC-17  | Commentaries,Deleted Scenes                            | 2006-02-15 05:03:42 |
+|      35 | ARACHNOPHOBIA ROLLERCOASTER | A Action-Packed Reflection of a Pastry Chef And a Composer who must Discover a Mad Scientist in The First Manned Space Station |         2006 |           1 |                 NULL |               4 |        2.99 |    147 |            24.99 | PG-13  | Trailers,Deleted Scenes,Behind the Scenes              | 2006-02-15 05:03:42 |
+|      65 | BEHAVIOR RUNAWAY            | A Unbelieveable Drama of a Student And a Husband who must Outrace a Sumo Wrestler in Berlin                                    |         2006 |           1 |                 NULL |               3 |        4.99 |    100 |            20.99 | PG     | Trailers,Deleted Scenes,Behind the Scenes              | 2006-02-15 05:03:42 |
+|      92 | BOWFINGER GABLES            | A Fast-Paced Yarn of a Waitress And a Composer who must Outgun a Dentist in California                                         |         2006 |           1 |                 NULL |               7 |        4.99 |     72 |            19.99 | NC-17  | Trailers,Deleted Scenes                                | 2006-02-15 05:03:42 |
+|     122 | CARRIE BUNCH                | A Amazing Epistle of a Student And a Astronaut who must Discover a Frisbee in The Canadian Rockies                             |         2006 |           1 |                 NULL |               7 |        0.99 |    114 |            11.99 | PG     | Trailers,Commentaries,Behind the Scenes                | 2006-02-15 05:03:42 |
+|     171 | COMMANDMENTS EXPRESS        | A Fanciful Saga of a Student And a Mad Scientist who must Battle a Hunter in An Abandoned Mine Shaft                           |         2006 |           1 |                 NULL |               6 |        4.99 |     59 |            13.99 | R      | Trailers,Commentaries,Deleted Scenes                   | 2006-02-15 05:03:42 |
+|     222 | DESERT POSEIDON             | A Brilliant Documentary of a Butler And a Frisbee who must Build a Astronaut in New Orleans                                    |         2006 |           1 |                 NULL |               4 |        4.99 |     64 |            27.99 | R      | Trailers,Behind the Scenes                             | 2006-02-15 05:03:42 |
+|     258 | DRUMS DYNAMITE              | A Epic Display of a Crocodile And a Crocodile who must Confront a Dog in An Abandoned Amusement Park                           |         2006 |           1 |                 NULL |               6 |        0.99 |     96 |            11.99 | PG     | Trailers                                               | 2006-02-15 05:03:42 |
+|     275 | EGYPT TENENBAUMS            | A Intrepid Story of a Madman And a Secret Agent who must Outrace a Astronaut in An Abandoned Amusement Park                    |         2006 |           1 |                 NULL |               3 |        0.99 |     85 |            11.99 | PG     | Commentaries,Deleted Scenes,Behind the Scenes          | 2006-02-15 05:03:42 |
+|     277 | ELEPHANT TROJAN             | A Beautiful Panorama of a Lumberjack And a Forensic Psychologist who must Overcome a Frisbee in A Baloon                       |         2006 |           1 |                 NULL |               4 |        4.99 |    126 |            24.99 | PG-13  | Behind the Scenes                                      | 2006-02-15 05:03:42 |
+|     301 | FAMILY SWEET                | A Epic Documentary of a Teacher And a Boy who must Escape a Woman in Berlin                                                    |         2006 |           1 |                 NULL |               4 |        0.99 |    155 |            24.99 | R      | Trailers                                               | 2006-02-15 05:03:42 |
+|     313 | FIDELITY DEVIL              | A Awe-Inspiring Drama of a Technical Writer And a Composer who must Reach a Pastry Chef in A U-Boat                            |         2006 |           1 |                 NULL |               5 |        4.99 |    118 |            11.99 | G      | Trailers,Deleted Scenes,Behind the Scenes              | 2006-02-15 05:03:42 |
+|     334 | FREDDY STORM                | A Intrepid Saga of a Man And a Lumberjack who must Vanquish a Husband in The Outback                                           |         2006 |           1 |                 NULL |               6 |        4.99 |     65 |            21.99 | NC-17  | Trailers,Commentaries,Behind the Scenes                | 2006-02-15 05:03:42 |
+|     351 | GASLIGHT CRUSADE            | A Amazing Epistle of a Boy And a Astronaut who must Redeem a Man in The Gulf of Mexico                                         |         2006 |           1 |                 NULL |               4 |        2.99 |    106 |            10.99 | PG     | Trailers,Deleted Scenes                                | 2006-02-15 05:03:42 |
+|     415 | HIGH ENCINO                 | A Fateful Saga of a Waitress And a Hunter who must Outrace a Sumo Wrestler in Australia                                        |         2006 |           1 |                 NULL |               3 |        2.99 |     84 |            23.99 | R      | Trailers,Commentaries,Behind the Scenes                | 2006-02-15 05:03:42 |
+|     475 | JAPANESE RUN                | A Awe-Inspiring Epistle of a Feminist And a Girl who must Sink a Girl in The Outback                                           |         2006 |           1 |                 NULL |               6 |        0.99 |    135 |            29.99 | G      | Deleted Scenes                                         | 2006-02-15 05:03:42 |
+|     494 | KARATE MOON                 | A Astounding Yarn of a Womanizer And a Dog who must Reach a Waitress in A MySQL Convention                                     |         2006 |           1 |                 NULL |               4 |        0.99 |    120 |            21.99 | PG-13  | Behind the Scenes                                      | 2006-02-15 05:03:42 |
+|     495 | KENTUCKIAN GIANT            | A Stunning Yarn of a Woman And a Frisbee who must Escape a Waitress in A U-Boat                                                |         2006 |           1 |                 NULL |               5 |        2.99 |    169 |            10.99 | PG     | Trailers,Commentaries,Deleted Scenes,Behind the Scenes | 2006-02-15 05:03:42 |
+|     506 | LADY STAGE                  | A Beautiful Character Study of a Woman And a Man who must Pursue a Explorer in A U-Boat                                        |         2006 |           1 |                 NULL |               4 |        4.99 |     67 |            14.99 | PG     | Trailers,Deleted Scenes,Behind the Scenes              | 2006-02-15 05:03:42 |
+|     527 | LOLA AGENT                  | A Astounding Tale of a Mad Scientist And a Husband who must Redeem a Database Administrator in Ancient Japan                   |         2006 |           1 |                 NULL |               4 |        4.99 |     85 |            24.99 | PG     | Trailers,Commentaries                                  | 2006-02-15 05:03:42 |
+|     535 | LOVE SUICIDES               | A Brilliant Panorama of a Hunter And a Explorer who must Pursue a Dentist in An Abandoned Fun House                            |         2006 |           1 |                 NULL |               6 |        0.99 |    181 |            21.99 | R      | Trailers,Behind the Scenes                             | 2006-02-15 05:03:42 |
+|     593 | MONTEREY LABYRINTH          | A Awe-Inspiring Drama of a Monkey And a Composer who must Escape a Feminist in A U-Boat                                        |         2006 |           1 |                 NULL |               6 |        0.99 |    158 |            13.99 | G      | Trailers,Commentaries                                  | 2006-02-15 05:03:42 |
+|     600 | MOTIONS DETAILS             | A Awe-Inspiring Reflection of a Dog And a Student who must Kill a Car in An Abandoned Fun House                                |         2006 |           1 |                 NULL |               5 |        0.99 |    166 |            16.99 | PG     | Trailers,Commentaries,Behind the Scenes                | 2006-02-15 05:03:42 |
+|     653 | PANIC CLUB                  | A Fanciful Display of a Teacher And a Crocodile who must Succumb a Girl in A Baloon                                            |         2006 |           1 |                 NULL |               3 |        4.99 |    102 |            15.99 | G      | Commentaries,Deleted Scenes                            | 2006-02-15 05:03:42 |
+|     658 | PARIS WEEKEND               | A Intrepid Story of a Squirrel And a Crocodile who must Defeat a Monkey in The Outback                                         |         2006 |           1 |                 NULL |               7 |        2.99 |    121 |            19.99 | PG-13  | Trailers,Commentaries,Deleted Scenes,Behind the Scenes | 2006-02-15 05:03:42 |
+|     665 | PATTON INTERVIEW            | A Thrilling Documentary of a Composer And a Secret Agent who must Succumb a Cat in Berlin                                      |         2006 |           1 |                 NULL |               4 |        2.99 |    175 |            22.99 | PG     | Commentaries                                           | 2006-02-15 05:03:42 |
+|     702 | PULP BEVERLY                | A Unbelieveable Display of a Dog And a Crocodile who must Outrace a Man in Nigeria                                             |         2006 |           1 |                 NULL |               4 |        2.99 |     89 |            12.99 | G      | Trailers,Behind the Scenes                             | 2006-02-15 05:03:42 |
+|     716 | REAP UNFAITHFUL             | A Thrilling Epistle of a Composer And a Sumo Wrestler who must Challenge a Mad Cow in A MySQL Convention                       |         2006 |           1 |                 NULL |               6 |        2.99 |    136 |            26.99 | PG-13  | Trailers,Commentaries                                  | 2006-02-15 05:03:42 |
+|     722 | REEF SALUTE                 | A Action-Packed Saga of a Teacher And a Lumberjack who must Battle a Dentist in A Baloon                                       |         2006 |           1 |                 NULL |               5 |        0.99 |    123 |            26.99 | NC-17  | Behind the Scenes                                      | 2006-02-15 05:03:42 |
+|     737 | ROCK INSTINCT               | A Astounding Character Study of a Robot And a Moose who must Overcome a Astronaut in Ancient India                             |         2006 |           1 |                 NULL |               4 |        0.99 |    102 |            28.99 | G      | Trailers,Commentaries,Deleted Scenes,Behind the Scenes | 2006-02-15 05:03:42 |
+|     740 | ROLLERCOASTER BRINGING      | A Beautiful Drama of a Robot And a Lumberjack who must Discover a Technical Writer in A Shark Tank                             |         2006 |           1 |                 NULL |               5 |        2.99 |    153 |            13.99 | PG-13  | Trailers,Commentaries,Deleted Scenes                   | 2006-02-15 05:03:42 |
+|     749 | RULES HUMAN                 | A Beautiful Epistle of a Astronaut And a Student who must Confront a Monkey in An Abandoned Fun House                          |         2006 |           1 |                 NULL |               6 |        4.99 |    153 |            19.99 | R      | Deleted Scenes,Behind the Scenes                       | 2006-02-15 05:03:42 |
+|     799 | SIMON NORTH                 | A Thrilling Documentary of a Technical Writer And a A Shark who must Face a Pioneer in A Shark Tank                            |         2006 |           1 |                 NULL |               3 |        0.99 |     51 |            26.99 | NC-17  | Trailers,Commentaries                                  | 2006-02-15 05:03:42 |
+|     800 | SINNERS ATLANTIS            | A Epic Display of a Dog And a Boat who must Succumb a Mad Scientist in An Abandoned Mine Shaft                                 |         2006 |           1 |                 NULL |               7 |        2.99 |    126 |            19.99 | PG-13  | Trailers,Commentaries,Deleted Scenes                   | 2006-02-15 05:03:42 |
+|     804 | SLEEPING SUSPECTS           | A Stunning Reflection of a Sumo Wrestler And a Explorer who must Sink a Frisbee in A MySQL Convention                          |         2006 |           1 |                 NULL |               7 |        4.99 |    129 |            13.99 | PG-13  | Trailers,Commentaries                                  | 2006-02-15 05:03:42 |
+|     830 | SPIRIT FLINTSTONES          | A Brilliant Yarn of a Cat And a Car who must Confront a Explorer in Ancient Japan                                              |         2006 |           1 |                 NULL |               7 |        0.99 |    149 |            23.99 | R      | Commentaries,Deleted Scenes                            | 2006-02-15 05:03:42 |
+|     854 | STRANGERS GRAFFITI          | A Brilliant Character Study of a Secret Agent And a Man who must Find a Cat in The Gulf of Mexico                              |         2006 |           1 |                 NULL |               4 |        4.99 |    119 |            22.99 | R      | Trailers,Behind the Scenes                             | 2006-02-15 05:03:42 |
+|     856 | STREETCAR INTENTIONS        | A Insightful Character Study of a Waitress And a Crocodile who must Sink a Waitress in The Gulf of Mexico                      |         2006 |           1 |                 NULL |               5 |        4.99 |     73 |            11.99 | R      | Commentaries                                           | 2006-02-15 05:03:42 |
+|     870 | SWARM GOLD                  | A Insightful Panorama of a Crocodile And a Boat who must Conquer a Sumo Wrestler in A MySQL Convention                         |         2006 |           1 |                 NULL |               4 |        0.99 |    123 |            12.99 | PG-13  | Trailers,Commentaries                                  | 2006-02-15 05:03:42 |
+|     876 | TARZAN VIDEOTAPE            | A Fast-Paced Display of a Lumberjack And a Mad Scientist who must Succumb a Sumo Wrestler in The Sahara Desert                 |         2006 |           1 |                 NULL |               3 |        2.99 |     91 |            11.99 | PG-13  | Trailers                                               | 2006-02-15 05:03:42 |
+|     881 | TEMPLE ATTRACTION           | A Action-Packed Saga of a Forensic Psychologist And a Woman who must Battle a Womanizer in Soviet Georgia                      |         2006 |           1 |                 NULL |               5 |        4.99 |     71 |            13.99 | PG     | Commentaries,Deleted Scenes                            | 2006-02-15 05:03:42 |
+|     885 | TEXAS WATCH                 | A Awe-Inspiring Yarn of a Student And a Teacher who must Fight a Teacher in An Abandoned Amusement Park                        |         2006 |           1 |                 NULL |               7 |        0.99 |    179 |            22.99 | NC-17  | Trailers                                               | 2006-02-15 05:03:42 |
+|     904 | TRAIN BUNCH                 | A Thrilling Character Study of a Robot And a Squirrel who must Face a Dog in Ancient India                                     |         2006 |           1 |                 NULL |               3 |        4.99 |     71 |            26.99 | R      | Trailers,Deleted Scenes                                | 2006-02-15 05:03:42 |
+|     909 | TREASURE COMMAND            | A Emotional Saga of a Car And a Madman who must Discover a Pioneer in California                                               |         2006 |           1 |                 NULL |               3 |        0.99 |    102 |            28.99 | PG-13  | Trailers,Commentaries,Deleted Scenes,Behind the Scenes | 2006-02-15 05:03:42 |
+|     922 | UNDEFEATED DALMATIONS       | A Unbelieveable Display of a Crocodile And a Feminist who must Overcome a Moose in An Abandoned Amusement Park                 |         2006 |           1 |                 NULL |               7 |        4.99 |    107 |            22.99 | PG-13  | Commentaries                                           | 2006-02-15 05:03:42 |
+|     965 | WATERSHIP FRONTIER          | A Emotional Yarn of a Boat And a Crocodile who must Meet a Moose in Soviet Georgia                                             |         2006 |           1 |                 NULL |               6 |        0.99 |    112 |            28.99 | G      | Commentaries                                           | 2006-02-15 05:03:42 |
+|     990 | WORLD LEATHERNECKS          | A Unbelieveable Tale of a Pioneer And a Astronaut who must Overcome a Robot in An Abandoned Amusement Park                     |         2006 |           1 |                 NULL |               3 |        0.99 |    171 |            13.99 | PG-13  | Trailers,Behind the Scenes                             | 2006-02-15 05:03:42 |
+|     995 | YENTL IDAHO                 | A Amazing Display of a Robot And a Astronaut who must Fight a Womanizer in Berlin                                              |         2006 |           1 |                 NULL |               5 |        4.99 |     86 |            11.99 | R      | Trailers,Commentaries,Deleted Scenes                   | 2006-02-15 05:03:42 |
+|     998 | ZHIVAGO CORE                | A Fateful Yarn of a Composer And a Man who must Face a Boy in The Canadian Rockies                                             |         2006 |           1 |                 NULL |               6 |        0.99 |    105 |            10.99 | NC-17  | Deleted Scenes                                         | 2006-02-15 05:03:42 |
++---------+-----------------------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+-------------+----------------------+-----------------+-------------+--------+------------------+--------+--------------------------------------------------------+---------------------+
+
