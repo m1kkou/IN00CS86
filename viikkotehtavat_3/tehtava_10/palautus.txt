@@ -1,0 +1,60 @@
+TEHTÄVÄNANTO:
+
+Tee kyselyjä arviointitietokannasta. Opiskelijoiden ja opintojaksojen nimien ei tarvitse olla samoja kuin esimerkissä. Taulurakenteen ja niiden välisten yhteyksien kuitenkin pitäisi olla ER-diagrammin mukainen. Muuta tehtävässä nimet vastaamaan tekemiäsi tauluja.
+
+1) Tulosta kaikki opiskelijat, joilla on tietokannassa hylätty arvosana
+
+2) Tulosta kaikki Fysiikka 3-kurssin hyväksytysti suorittaneet
+
+3) Mille kursseille Hessu on osallistunut ?
+
+4) Mikä on Akun opintosuoritusten keskiarvo ?
+
+5) Millä opintojaksoilla ei ole yhtään suoritusmerkintää ? (Vihje: Tarvitset tässä left tai right joinia...)
+
+Opiskelijoiden ja opintojaksojen nimien ei tarvitse olla samoja kuin esimerkissä. Muuta tehtävässä nimet vastaamaan tekemiäsi tauluja.
+
+1) 
+SELECT 
+Opiskelija.Etunimi AS Etunimi,
+Opiskelija.Sukunimi AS Sukunimi
+FROM Opiskelija
+JOIN Arviointi ON Arviointi.idOpiskelija = Opiskelija.idOpiskelija
+WHERE Arviointi.arvosana IS NULL
+GROUP BY Opiskelija.idOpiskelija
+
+2)
+SELECT 
+Opiskelija.Etunimi AS Etunimi,
+Opiskelija.Sukunimi AS Sukunimi
+FROM Opiskelija
+JOIN Arviointi ON Arviointi.idOpiskelija = Opiskelija.idOpiskelija
+JOIN Opintojakso ON Arviointi.idOpintojakso = Opintojakso.idOpintojakso
+WHERE Arviointi.arvosana IS NOT NULL 
+AND Arviointi.arvosana > 0
+AND Opintojakso.Nimi LIKE '%Fysiikka 3%'
+
+3)
+SELECT 
+Opintokurssi.Nimi AS kurssi
+FROM Opintojakso
+JOIN Opiskelija ON Arviointi.idOpintojakso = Opintojakso.idOpintojakso
+JOIN Arviointi ON Arviointi.idOpiskelija = Opiskelija.idOpiskelija
+WHERE Opiskelija.Etunimi = 'Hessu' 
+
+4)
+SELECT 
+AVERAGE(Arviointi.arvosana) AS Keskiarvo
+FROM Arviointi
+JOIN Opiskelija ON Arviointi.idOpiskelija = Opiskelija.idOpiskelija
+JOIN Opintojakso ON Arviointi.idOpintojakso = Opintojakso.idOpintojakso
+WHERE Opiskelija.Etunimi = 'Aku'
+
+5) 
+SELECT
+Opintojakso.Nimi,
+COUNT(Arviointi.idOpintojakso) AS lkm
+FROM Arviointi
+RIGHT JOIN Opintojakso ON Arviointi.idOpintojakso = Opintojakso.idOpintojakso
+GROUP BY Arviointi.idOpintojakso;
+
