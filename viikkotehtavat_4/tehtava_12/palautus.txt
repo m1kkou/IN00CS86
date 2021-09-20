@@ -1,0 +1,34 @@
+TEHTÄVÄNANTO:
+Syötä jokaiseen kirjastotietokannan tauluun muutama tietue.
+
+- Ainakin kaksi samaa kirjaa (pitää tallentua eri pääavaimille)
+- Kirja, jossa on useampi kuin yksi tekijä.
+- Lainaustapahtuma, jossa asiakas on lainannut kirjan ja se on vielä lainassa.
+
+
+
+use Kirjastotietokanta;
+
+INSERT INTO Kirjastotietokanta.Tekija VALUES (1, 'Kalle', 'Päätalo');
+
+INSERT INTO Kirjastotietokanta.Tekija VALUES (2, 'Pasi', 'Päätalo');
+
+INSERT INTO Kirjastotietokanta.TeoksenTekijat VALUES (1, 1);
+
+INSERT INTO Kirjastotietokanta.TeoksenTekijat VALUES (2, 1);
+
+INSERT INTO Kirjastotietokanta.TeoksenTekijat VALUES (2, 2);
+
+INSERT INTO Kirjastotietokanta.Teos VALUES (1, 'Riipivä kurjuus');
+
+INSERT INTO Kirjastotietokanta.Teos VALUES (2, 'Pasianssin alkeet');
+
+INSERT INTO Kirjastotietokanta.Kirja VALUES (1, 1, 'KP-01');
+
+INSERT INTO Kirjastotietokanta.Kirja VALUES (2, 1, 'KP-02');
+
+INSERT INTO Kirjastotietokanta.Kirja VALUES (3, 2, 'VP-01');
+
+INSERT INTO Kirjastotietokanta.Asiakas VALUES (1, 'Simeon', 'Liuhuparta');
+
+INSERT INTO Kirjastotietokanta.Lainaus VALUES (1, 1, 1, 0);
