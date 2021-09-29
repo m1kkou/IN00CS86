@@ -1,13 +1,37 @@
 TEHTÄVÄNANTO:
 Syötä jokaiseen kirjastotietokannan tauluun muutama tietue.
 
-- Ainakin kaksi samaa kirjaa (pitää tallentua eri pääavaimille)
-- Kirja, jossa on useampi kuin yksi tekijä.
-- Lainaustapahtuma, jossa asiakas on lainannut kirjan ja se on vielä lainassa.
+- 
+
+- 
 
 
 
-use Kirjastotietokanta;
+Ainakin kaksi samaa kirjaa (pitää tallentua eri pääavaimille):
+
+INSERT INTO Kirjastotietokanta.Kirja VALUES (1, 1, 'KP-01');
+
+INSERT INTO Kirjastotietokanta.Kirja VALUES (2, 1, 'KP-02');
+
+INSERT INTO Kirjastotietokanta.Kirja VALUES (3, 2, 'VP-01');
+
+TARKASTUS:
+SELECT * FROM Kirja
+
++----+--------+-------------+
+| ID | TeosID | Hyllypaikka |
++----+--------+-------------+
+|  1 |      1 | KP-01       |
+|  2 |      1 | KP-02       |
+|  3 |      2 | VP-01       |
++----+--------+-------------+
+3 rows in set (0.001 sec)
+
+Vaikuttaisi olevan kunnossa!
+
+
+
+Kirja, jossa on useampi kuin yksi tekijä:
 
 INSERT INTO Kirjastotietokanta.Tekija VALUES (1, 'Kalle', 'Päätalo');
 
@@ -23,12 +47,40 @@ INSERT INTO Kirjastotietokanta.Teos VALUES (1, 'Riipivä kurjuus');
 
 INSERT INTO Kirjastotietokanta.Teos VALUES (2, 'Pasianssin alkeet');
 
-INSERT INTO Kirjastotietokanta.Kirja VALUES (1, 1, 'KP-01');
+TARKASTUS:
 
-INSERT INTO Kirjastotietokanta.Kirja VALUES (2, 1, 'KP-02');
+SELECT * FROM TeoksenTekijat TT
+JOIN Teos T ON T.ID = TT.TeosID
+JOIN Tekija Tk ON Tk.ID = TT.TekijaID;
 
-INSERT INTO Kirjastotietokanta.Kirja VALUES (3, 2, 'VP-01');
++----------+--------+----+-------------------+----+---------+-----------+
+| TekijaID | TeosID | ID | nimi              | ID | etunimi | sukunimi  |
++----------+--------+----+-------------------+----+---------+-----------+
+|        1 |      1 |  1 | Riipivä kurjuus   |  1 | Kalle   | Päätalo   |
+|        2 |      1 |  1 | Riipivä kurjuus   |  2 | Pasi    | Päätalo   |
+|        2 |      2 |  2 | Pasianssin alkeet |  2 | Pasi    | Päätalo   |
++----------+--------+----+-------------------+----+---------+-----------+
+
+Vaikuttaisi olevan kunnossa!
+
+
+Lainaustapahtuma, jossa asiakas on lainannut kirjan ja se on vielä lainassa:
 
 INSERT INTO Kirjastotietokanta.Asiakas VALUES (1, 'Simeon', 'Liuhuparta');
 
 INSERT INTO Kirjastotietokanta.Lainaus VALUES (1, 1, 1, 0);
+
+TARKASTUS:
+
+SELECT * FROM Lainaus L 
+JOIN Asiakas A ON A.ID = L.AsiakasID
+JOIN Kirja K ON K.ID = L.KirjaID
+
++----+---------+-----------+--------------+----+---------+------------+----+--------+-------------+
+| ID | KirjaID | AsiakasID | OnPalautettu | ID | etunimi | sukunimi   | ID | TeosID | Hyllypaikka |
++----+---------+-----------+--------------+----+---------+------------+----+--------+-------------+
+|  1 |       1 |         1 |            0 |  1 | Simeon  | Liuhuparta |  1 |      1 | KP-01       |
++----+---------+-----------+--------------+----+---------+------------+----+--------+-------------+
+1 row in set (0.001 sec)
+
+Vaikuttaisi myös toimivan!
