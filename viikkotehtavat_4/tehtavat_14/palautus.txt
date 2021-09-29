@@ -1,1 +1,9 @@
-Tässä 14 tehtävä
+a) Tee kirjastotietokantaan aliohjelma, joka lisää uuden teoksen ja sille tekijätiedot.
+
+b) Tee kirjastotietokantaan aliohjelma, joka lisää uuden lainaustapahtuman. Aliohjelmassa pitää suorittaa tarkastus sille, että kirja ei jo ole lainassa.
+
+c) Tee kirjastotietokantaan aliohjelma, joka tulostaa kaikki myöhässä olevat kirjat ja niiden lainaajat.
+
+d) Tee opintorekisteritietokantaan aliohjelma, joka lisää uuden opintosuorituksen. Syötteeksi annetaan opiskelijan etunimi, sukunimi, kurssikoodi ja arvosana. Aliohjelman pitää tarkistaa, että opiskelija ja opintojakso ovat olemassa ja että arvosana on välillä 0 - 5.
+
+e) Tee opintorekisteritietokantaan aliohjelma, joka poistaa opiskelijan opintosuorituksen. Syötteeksi annetaan opiskelijan nimi ja opintojakson koodi. Ohjelman pitää tarkistaa, että suoritus löytyy tietokannasta ennen poistoa. Jos ei löydy, annetaan virheilmoitus.
